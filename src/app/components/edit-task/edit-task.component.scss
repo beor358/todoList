@@ -1,0 +1,59 @@
+.content-box {
+	width: 400px;
+}
+.title {
+	padding: 14px;
+	background-color: #4fc1e9;
+	color: #ffffff;
+	font-size: 18px;
+    font-weight: 300;
+}
+.task-info {
+	display: block;
+	padding: 10px 20px;
+	border-bottom: 1px solid #EEEEEE;
+	p {
+		padding: 5px 12px;
+		font-size: 14px;
+    	font-weight: 300;
+    	color: #000000;
+    	&.task-title {
+    		font-size: 18px;
+    		font-weight: 500;
+    		margin-bottom: 5px;
+    		color: #3bafda;
+    	}
+	}
+}
+.form-wrapper {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-content: space-between;
+	box-sizing: border-box;
+	border-radius: 3px;
+	padding: 0 20px;
+	.form-group {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		flex-grow: 1;
+		label {
+			flex-grow: 1;
+		}
+		.form-control {
+			flex-grow: 2;
+		}
+		.form-control, label {
+			flex-basis: 0;
+			text-align: left;
+			padding: 12px;
+		}
+		label {
+			font-size: 14px;
+			font-weight: 300;
+			color: #000000;
+		}
+	}
+}

@@ -1,0 +1,39 @@
+<div class="content-box">
+<a class="material-icons back-btn btn" (click)="goBack()">keyboard_backspace</a>
+<div class="title">Edit task</div>
+<div class="task-info">
+  <p class="task-title">{{ task.name }}</p>
+  <p><span>Description: </span>{{ task.description }}</p>
+  <p><span>Start date: </span>{{ task.startDate | date:"yyyy-MM-dd HH:mm" }}</p>
+  <p><span>Finish date: </span>{{ task.finishDate | date:"yyyy-MM-dd HH:mm" }}</p>
+  <p><span>Priority: </span>{{ task.priority }}</p>
+</div>
+<div class="form-wrapper" *ngIf="task">
+    <div class="form-group">
+      <label for="title">Title: </label>
+      <input class="form-control" id="title" [(ngModel)]="task.name" placeholder="title"/>
+    </div>
+    <div class="form-group">
+      <label for="description">Description: </label>
+      <input class="form-control" id="description" [(ngModel)]="task.description" placeholder="description"/>
+    </div>
+    <div class="form-group">
+      <label for="start-date">Start date: </label>
+      <input class="form-control" id="start-date" type="datetime-local" [(ngModel)]="task.startDate" placeholder="startDate" required>
+    </div>
+    <div class="form-group">
+      <label for="finish-date">Finish date: </label>
+      <input class="form-control" id="finish-date" type="datetime-local" [(ngModel)]="task.finishDate" placeholder="finishDate" required>
+    </div>
+    <div class="form-group">
+      <label for="priority">Priority: </label>
+      <select class="form-control" id="priority" required [(ngModel)]="task.priority" name="priority" #priority="ngModel">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+    </div>
+  <!-- <button (click)="goBack()">Вернуться</button> -->
+  <button class="edit-task-btn btn" (click)="updateTask()">SAVE</button>
+</div>
+</div>

@@ -1,0 +1,48 @@
+<div class="content-box">
+<div class="todo-list">
+  <a class="material-icons add-task-btn btn" routerLink="/newtask">add</a>
+  <!-- <a class="todo-item" routerLink="/newtask">Add new task</a> -->
+  <div class="todo-item item-titles">
+    <button class="item-col col-title" (click)="sortTasksByName()">TITLE</button>
+    <button class="item-col col-title" (click)="sortTasksByDate()">DATE</button>
+    <button class="item-col col-title" (click)="sortTasksByPriority()">PRIORITY</button>
+    <button class="item-col col-title" (click)="sortTasksByCompleted()">STATUS</button>
+    <p class="item-col col-title"></p>
+  </div>
+   
+  <div class="todo-item">
+    <input class="item-col" type="text" [(ngModel)]="filterName" placeholder="Input title" />
+    <input class="item-col" type="date" [(ngModel)]="filterDate" placeholder="dateFilter" />
+    <select class="item-col" [(ngModel)]="filterPriority" name="priority" #priority="ngModel">
+      <option></option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <select class="item-col" [(ngModel)]="filterCompleted" name="completed" #completed="ngModel">
+      <option></option>
+      <option value="true">Completed</option>
+      <option vlaue="false">In progress</option>
+    </select>
+    <div class="item-col">
+    </div>
+  </div>
+
+  <div class="todo-item" *ngFor="let task of tasks | filter: filterName:filterDate:filterPriority:filterCompleted" [style.background-color]="taskIsOverdue(task)">
+    <p class="item-col">
+    	{{ task.name }}
+    </p>
+    <p class="item-col">{{ task.startDate | date:"yyyy-MM-dd HH:mm" }}</p>
+    <p class="item-col">{{ task.priority }}</p>
+    <p class="item-col" *ngIf="task.completed; else uncompleted">Completed</p>
+    <ng-template #uncompleted>
+    	 <p class="item-col">In progress</p>
+    </ng-template>
+    <div class="item-col">
+      <a class="material-icons task-btn btn" (click)="completeTask(task)">done</a>
+      <a class="material-icons task-btn btn" routerLink="/task/{{ task.id }}">mode_edit</a>
+    	<a class="material-icons task-btn btn" (click)="deleteTask(task)">delete</a>
+    </div>
+  </div>
+</div>
+</div>

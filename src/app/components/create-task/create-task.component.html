@@ -1,0 +1,49 @@
+<div class="content-box">
+<a class="material-icons back-btn btn" (click)="goBack()">keyboard_backspace</a>
+<div class="title">Create task</div>
+<form [formGroup]="form" class="form-wrapper">
+  	<div class="form-group" [ngClass]="{'error': form.controls['name'].errors && !form.controls['name'].pristine}">
+  	  <label for="name">Title: </label>
+  	  <input type="text" class="form-control" id="name" formControlName="name" required>
+      <div *ngIf="form.controls['name'].errors && !form.controls['name'].pristine" class="error-msg">
+        <div [hidden]="!form.controls['name'].errors.required">Title is required.</div>
+      </div>
+  	</div>
+    <div class="form-group" [ngClass]="{'error': form.controls['description'].errors && !form.controls['description'].pristine}">
+  	  <label for="description">Description: </label>
+  	  <input type="text" class="form-control" id="description" formControlName="description" required>
+      <div *ngIf="form.controls['description'].errors && !form.controls['description'].pristine" class="error-msg">
+        <div [hidden]="!form.controls['description'].errors.required">Description is required.</div>
+      </div>
+  	</div>
+    <div class="form-group" [ngClass]="{'error': form.controls['startDate'].errors && !form.controls['startDate'].pristine}">
+  	  <label for="start-date">Start date: </label>
+  	  <input type="datetime-local" class="form-control" id="start-date" formControlName="startDate" required>
+      <div *ngIf="form.controls['startDate'].errors && !form.controls['startDate'].pristine" class="error-msg">
+        <div [hidden]="!form.controls['startDate'].errors.required">Start date is required.</div>
+      </div>
+  	</div>
+  	<div class="form-group" [ngClass]="{'error': form.controls['finishDate'].errors && !form.controls['finishDate'].pristine}">
+  	  <label for="finish-date">Finish date: </label>
+  	  <input type="datetime-local" class="form-control" id="finish-date" formControlName="finishDate" required>
+      <div *ngIf="form.controls['finishDate'].errors && !form.controls['finishDate'].pristine" class="error-msg">
+        <div [hidden]="!form.controls['finishDate'].errors.required">Finish date is required.</div>
+      </div>
+  	</div>
+  	<div class="form-group" [ngClass]="{'error': form.controls['priority'].errors && !form.controls['priority'].pristine}">
+  	  <label for="priority">Priority: </label>
+	    <select class="form-control" id="priority" formControlName="priority" required>
+	  	  <option>1</option>
+	  	  <option>2</option>
+	  	  <option>3</option>
+	  	</select>
+      <div *ngIf="form.controls['priority'].errors && !form.controls['priority'].pristine" class="error-msg">
+        <div [hidden]="!form.controls['priority'].errors.required">Priority is required.</div>
+      </div>
+  	</div>
+  <!-- <button (click)="goBack()">Вернуться</button> -->
+  <div>
+    <button class="create-task-btn btn" [disabled]="form.invalid" (click)="addTask()">CREATE</button>
+  </div>
+</form>
+</div>
