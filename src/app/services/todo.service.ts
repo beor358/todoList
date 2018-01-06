@@ -16,16 +16,22 @@ export class TodoService {
     }
   }
 
-  public addTask(values: Object): void {
+  public addTask(values: Object, priority: number): void {
   	let tasks = this.getTasks();
-  	let task = new Task(this.nextId, values);
+  	let task = new Task(this.nextId, values, priority);
   	tasks.push(task);
   	this.setLocalStorageTasks(tasks);
   	this.nextId++;
   }
 
   public getTasks(): Task[] {
-  	let item = JSON.parse(localStorage.getItem('tasks'));
+    let item = JSON.parse(localStorage.getItem('tasks'));
+    if(item != null) { 
+      item.tasks.forEach(task => {
+        task.startDate = new Date(task.startDate);
+        task.finishDate = new Date(task.finishDate);
+      });
+    }
   	return item == null ? [] : item.tasks;
   }
 
@@ -56,7 +62,7 @@ export class TodoService {
 
   public sortTasksByName(): void {
     let tasks = this.getTasks();
-    tasks.sort((taskA: Task, taskB: Task) => +(taskA.name > taskB.name));
+    tasks.sort((taskA: Task, taskB: Task) => +(taskA.name.toLowerCase() > taskB.name.toLowerCase()));
     this.setLocalStorageTasks(tasks);
   }
 
@@ -68,7 +74,7 @@ export class TodoService {
 
   public sortTasksByPriority(): void {
     let tasks = this.getTasks();
-    tasks.sort((taskA: Task, taskB: Task) => taskA.priority - taskB.priority);
+    tasks.sort((taskA: Task, taskB: Task) => taskA.priority.id - taskB.priority.id);
     this.setLocalStorageTasks(tasks);
   }
 

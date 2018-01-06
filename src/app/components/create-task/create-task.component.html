@@ -1,49 +1,49 @@
-<div class="content-box">
-<a class="material-icons back-btn btn" (click)="goBack()">keyboard_backspace</a>
-<div class="title">Create task</div>
-<form [formGroup]="form" class="form-wrapper">
-  	<div class="form-group" [ngClass]="{'error': form.controls['name'].errors && !form.controls['name'].pristine}">
-  	  <label for="name">Title: </label>
-  	  <input type="text" class="form-control" id="name" formControlName="name" required>
-      <div *ngIf="form.controls['name'].errors && !form.controls['name'].pristine" class="error-msg">
-        <div [hidden]="!form.controls['name'].errors.required">Title is required.</div>
-      </div>
-  	</div>
-    <div class="form-group" [ngClass]="{'error': form.controls['description'].errors && !form.controls['description'].pristine}">
-  	  <label for="description">Description: </label>
-  	  <input type="text" class="form-control" id="description" formControlName="description" required>
-      <div *ngIf="form.controls['description'].errors && !form.controls['description'].pristine" class="error-msg">
-        <div [hidden]="!form.controls['description'].errors.required">Description is required.</div>
-      </div>
-  	</div>
-    <div class="form-group" [ngClass]="{'error': form.controls['startDate'].errors && !form.controls['startDate'].pristine}">
-  	  <label for="start-date">Start date: </label>
-  	  <input type="datetime-local" class="form-control" id="start-date" formControlName="startDate" required>
-      <div *ngIf="form.controls['startDate'].errors && !form.controls['startDate'].pristine" class="error-msg">
-        <div [hidden]="!form.controls['startDate'].errors.required">Start date is required.</div>
-      </div>
-  	</div>
-  	<div class="form-group" [ngClass]="{'error': form.controls['finishDate'].errors && !form.controls['finishDate'].pristine}">
-  	  <label for="finish-date">Finish date: </label>
-  	  <input type="datetime-local" class="form-control" id="finish-date" formControlName="finishDate" required>
-      <div *ngIf="form.controls['finishDate'].errors && !form.controls['finishDate'].pristine" class="error-msg">
-        <div [hidden]="!form.controls['finishDate'].errors.required">Finish date is required.</div>
-      </div>
-  	</div>
-  	<div class="form-group" [ngClass]="{'error': form.controls['priority'].errors && !form.controls['priority'].pristine}">
-  	  <label for="priority">Priority: </label>
-	    <select class="form-control" id="priority" formControlName="priority" required>
-	  	  <option>1</option>
-	  	  <option>2</option>
-	  	  <option>3</option>
-	  	</select>
-      <div *ngIf="form.controls['priority'].errors && !form.controls['priority'].pristine" class="error-msg">
-        <div [hidden]="!form.controls['priority'].errors.required">Priority is required.</div>
-      </div>
-  	</div>
-  <!-- <button (click)="goBack()">Вернуться</button> -->
-  <div>
-    <button class="create-task-btn btn" [disabled]="form.invalid" (click)="addTask()">CREATE</button>
-  </div>
-</form>
-</div>
+<a mat-fab class="add-task" (click)="goBack()">
+  <mat-icon>keyboard_backspace</mat-icon>
+</a>
+
+<mat-card class="content-box">
+
+	<mat-card-title color="primary">Create task</mat-card-title>
+
+	<form [formGroup]="form" novalidate>	
+
+		<mat-form-field>
+			<input matInput formControlName="name" placeholder="Title" required>
+			<mat-error>{{errors.name}}</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<textarea matInput formControlName="description" placeholder="Description"></textarea>
+			<mat-error>{{errors.description}}</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="Start date" required>
+			<mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+			<mat-datepicker #startPicker></mat-datepicker>
+			<mat-error>{{errors.startDate}}</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput [matDatepicker]="picker" formControlName="finishDate" placeholder="Finish date" required>
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+			<mat-error>{{errors.finishDate}}</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+        <mat-select placeholder="Select priority" formControlName="priority" required>
+        <mat-option></mat-option>
+        <mat-option *ngFor="let priorityName of PRIORITYS; let i = index" [value]="i+1">
+          {{priorityName}}
+        </mat-option>
+			</mat-select>
+			<mat-error>{{errors.priority}}</mat-error>
+		</mat-form-field>
+
+		<button color="primary" mat-button (click)="addTask()">CREATE</button>
+	
+	</form>
+
+</mat-card>

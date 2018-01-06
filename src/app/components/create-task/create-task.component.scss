@@ -1,55 +1,7 @@
 .content-box {
 	width: 400px;
+	margin: 0 auto;
 }
-.title {
-	padding: 14px;
-	background-color: #4fc1e9;
-	color: #ffffff;
-	font-size: 18px;
-    font-weight: 300;
-}
-.form-wrapper {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	align-content: space-between;
-	box-sizing: border-box;
-	border-radius: 3px;
-	padding: 0 20px;
-	.form-group {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		flex-grow: 1;
-		position: relative;
-		margin-bottom: 5px;
-		label {
-			flex-grow: 1;
-		}
-		.form-control {
-			flex-grow: 2;
-		}
-		.form-control, label {
-			flex-basis: 0;
-			text-align: left;
-			padding: 12px;
-		}
-		label {
-			font-size: 14px;
-			font-weight: 300;
-			color: #000000;
-		}
-		&.error {
-
-		  	color: red;
-		}
-		.error-msg {
-		  	display: block;
-		  	position: absolute;
-		  	font-size: 12px;
-		  	bottom: -14px;
-		  	left: 35%;
-		}
-	}
+.mat-form-field {
+	width: 100%;
 }

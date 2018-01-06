@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { PostsComponent } from './components/posts/posts/posts.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
   	path: 'task/:id',
   	component: EditTaskComponent
+  },
+  {
+    path: 'posts',
+    component: PostsComponent
   }
 ];
 @NgModule({

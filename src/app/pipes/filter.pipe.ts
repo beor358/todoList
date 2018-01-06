@@ -1,39 +1,40 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Task } from '../classes/task';
+import { Priority } from '../classes/priority';
 
 @Pipe({
-  name: 'filter'
+    name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(tasks: Array<Task>, name: string, date: string, priority: number, completed: string): Array<any> {
-    console.log(typeof completed);
+    transform(tasks: Array<Task>, fs: any): Array<Task> {
         if (tasks && tasks.length) {
             return tasks.filter(task => {
-                if (name) {
-                  if(!task.name.toLowerCase().includes(name.toLowerCase())) {
-                    return false;
-                  }
+                if (fs.name) {
+                    if (!task.name.toLowerCase().includes(fs.name.toLowerCase())) {
+                        return false;
+                    }
                 }
-                if (date) {
-                  if(!task.startDate.includes(date)) {
-                    return false;
-                  }
+                if (fs.date) {
+                    if (task.startDate.valueOf() !== fs.date.valueOf()) {
+                        return false;
+                    }
                 }
-                if (priority) {
-                  if(task.priority !== priority) {
-                    return false;
-                  }
+                if (fs.priority) {
+                    if (fs.priority != task.priority.id) {
+                        return false;
+                    }
                 }
-                if (completed){ 
-                  if((completed === 'true') !== task.completed){
-                    return false;
-                  }
+                if (fs.completed) {
+                    if (!(fs.completed && task.completed)) {
+                        return false;
+                    }
+                    console.log(fs.completed);
                 }
                 return true;
-           })
+            })
         }
-        else{
+        else {
             return tasks;
         }
     }

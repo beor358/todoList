@@ -1,50 +1,38 @@
-.content-box {
-	width: 1200px;	
-}
+@import '~@angular/material/theming';
 
-.todo-list {
+.content-box {
 	display: flex;
 	flex-direction: column;
-	flex-wrap: nowrap;
-	align-content: space-between;
+	max-width: 1200px;
+	margin: 18px auto;
+	padding: 0;
+	.flex-row {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		padding: 0 24px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+		// &.header-row {
+		// 	margin: 0 -24px;
+		// 	// background-color: mat-color($mat-light-blue, 500);
+		// }
+		.flex-col {
+			box-sizing: border-box;
+			flex-grow: 1;
+			width: 100%;
+			.col-header {
+				width:100%;
+				height: 100%;
+				text-align: left;
+			}
+			.filter-field {
+				// width:100%;
+				input {
+					width: 90%;
+					margin: 0 auto
+				}
+			}
+		}
+	}
 }
 
-.todo-item {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	flex-grow: 1;
-	border-bottom: 1px solid #EEEEEE;
-	input.item-col, select.item-col {
-		margin: 0 2px;
-		padding: 10px;
-	}
-	.item-col {
-		flex-grow: 1;
-		flex-basis: 0;
-		text-align: left;
-		padding: 14px;
-		border:none;
-		font-size: 14px;
-		font-weight: 300;
-		color: #000000;
-		&:last-child {
-			text-align: center;
-		}
-		.task-btn {
-			color: #000000;
-			margin-left: 10px;
-		}
-	}
-	.col-title {
-		border-right: 1px solid #ffffff;
-		background-color: #4fc1e9;
-		color: #ffffff;
-		font-size: 14px;
-		font-weight: 500;
-		&:last-child {
-			border: none;
-		}
-	}
-}

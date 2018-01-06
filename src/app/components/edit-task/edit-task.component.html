@@ -1,39 +1,48 @@
-<div class="content-box">
-<a class="material-icons back-btn btn" (click)="goBack()">keyboard_backspace</a>
-<div class="title">Edit task</div>
+<a mat-fab class="add-task" (click)="goBack()">
+  <mat-icon>keyboard_backspace</mat-icon>
+</a>
+
+<mat-card class="content-box">
+<mat-card-title>Edit task</mat-card-title>
 <div class="task-info">
-  <p class="task-title">{{ task.name }}</p>
+  <p><span>Ttle: </span>{{ task.name }}</p>
   <p><span>Description: </span>{{ task.description }}</p>
-  <p><span>Start date: </span>{{ task.startDate | date:"yyyy-MM-dd HH:mm" }}</p>
-  <p><span>Finish date: </span>{{ task.finishDate | date:"yyyy-MM-dd HH:mm" }}</p>
-  <p><span>Priority: </span>{{ task.priority }}</p>
+  <p><span>Start date: </span>{{ task.startDate | date:"yyyy-MM-dd" }}</p>
+  <p><span>Finish date: </span>{{ task.finishDate | date:"yyyy-MM-dd" }}</p>
+  <p><span>Priority: </span>{{ task.priority.name }}</p>
 </div>
-<div class="form-wrapper" *ngIf="task">
-    <div class="form-group">
-      <label for="title">Title: </label>
-      <input class="form-control" id="title" [(ngModel)]="task.name" placeholder="title"/>
-    </div>
-    <div class="form-group">
-      <label for="description">Description: </label>
-      <input class="form-control" id="description" [(ngModel)]="task.description" placeholder="description"/>
-    </div>
-    <div class="form-group">
-      <label for="start-date">Start date: </label>
-      <input class="form-control" id="start-date" type="datetime-local" [(ngModel)]="task.startDate" placeholder="startDate" required>
-    </div>
-    <div class="form-group">
-      <label for="finish-date">Finish date: </label>
-      <input class="form-control" id="finish-date" type="datetime-local" [(ngModel)]="task.finishDate" placeholder="finishDate" required>
-    </div>
-    <div class="form-group">
-      <label for="priority">Priority: </label>
-      <select class="form-control" id="priority" required [(ngModel)]="task.priority" name="priority" #priority="ngModel">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-    </div>
-  <!-- <button (click)="goBack()">Вернуться</button> -->
-  <button class="edit-task-btn btn" (click)="updateTask()">SAVE</button>
-</div>
-</div>
+
+<div *ngIf="task">
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="task.name" placeholder="Title" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="task.description" placeholder="Description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="startPicker" [(ngModel)]="task.startDate" placeholder="Start date" required>
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="task.finishDate" placeholder="Finish date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="id" [(ngModel)]="task.priority.id" required>
+        <mat-option></mat-option>
+        <mat-option *ngFor="let priorityName of PRIORITYS; let i = index" [value]="i+1">
+          {{priorityName}}
+        </mat-option>
+			</mat-select>
+    </mat-form-field>
+    
+  <button color="primary" mat-button (click)="updateTask()">SAVE</button>
+  </div>
+</mat-card>

@@ -1,27 +1,17 @@
-const PRIORITY = [
-  'High',
-  'Middle',
-  'Low'
-]
+import { Priority } from './priority';
+
 export class Task {
   id: number;
   name: string;
-  startDate: string;
-  finishDate: string;
+  startDate: Date;
+  finishDate: Date;
   description: string;
-  priority: number;
+  priority: Priority;
   completed: boolean = false;
 
-  constructor(id: number, values: Object = {}) {
+  constructor(id: number, values: Object = {}, priority: number) {
   	Object.assign(this, values);
+    this.priority = new Priority(priority);
   	this.id = id;
   }
-
-  // set priority(i: number) {
-  //   this._priority = PRIORITY[i -1];
-  // }
-
-  // get priority(): string {
-  //   return PRIORITY[this._priority - 1];
-  // }
 }

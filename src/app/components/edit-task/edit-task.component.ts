@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { TodoService } from '../../services/todo.service';
 import { Task } from '../../classes/task';
+import { Priority } from '../../classes/priority';
 
 @Component({
   selector: 'app-edit-task',
@@ -14,7 +15,13 @@ import { Task } from '../../classes/task';
 export class EditTaskComponent implements OnInit {
   
   @Input() task: Task;
+  public priorityId: number;
 
+  PRIORITYS = [
+    'High',
+    'Middle',
+    'Low'
+  ];
   constructor(
   	private todoService: TodoService,
   	private route: ActivatedRoute,
@@ -30,6 +37,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   public updateTask(): void {
+    this.task.priority = new Priority(this.task.priority.id);
   	this.todoService.updateTaskById(this.task.id, this.task);
   }
 
