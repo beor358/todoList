@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { 
   MatCardModule, 
   MatToolbarModule, 
@@ -26,7 +27,8 @@ import { TestJsonService } from './services/test-json.service';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { FilterPipe } from './pipes/filter.pipe';
-import { PostsComponent } from './components/posts/posts/posts.component';
+import { PostsComponent } from './components/posts/posts.component';
+import { PostComponent } from './components/post/post.component';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { PostsComponent } from './components/posts/posts/posts.component';
     TodoListComponent,
     EditTaskComponent,
     FilterPipe,
-    PostsComponent
+    PostsComponent,
+    PostComponent
   ],
   imports: [
     NoopAnimationsModule,
@@ -45,6 +48,7 @@ import { PostsComponent } from './components/posts/posts/posts.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpModule,
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
@@ -73,7 +77,8 @@ import { PostsComponent } from './components/posts/posts/posts.component';
     MatCheckboxModule
   ],
   providers: [
-  	TodoService
+    TodoService,
+    TestJsonService
   ],
   bootstrap: [AppComponent]
 })
