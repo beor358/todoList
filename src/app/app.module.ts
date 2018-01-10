@@ -17,7 +17,8 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -29,6 +30,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
 
 
 @NgModule({
@@ -39,7 +42,9 @@ import { PostComponent } from './components/post/post.component';
     EditTaskComponent,
     FilterPipe,
     PostsComponent,
-    PostComponent
+    PostComponent,
+    CommentsComponent,
+    AddPostComponent
   ],
   imports: [
     NoopAnimationsModule,
@@ -60,7 +65,8 @@ import { PostComponent } from './components/post/post.component';
     MatNativeDateModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule
   ],
   exports: [
     MatCardModule,
@@ -74,12 +80,14 @@ import { PostComponent } from './components/post/post.component';
     MatNativeDateModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule    
   ],
   providers: [
     TodoService,
     TestJsonService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ AddPostComponent ]
 })
 export class AppModule { }

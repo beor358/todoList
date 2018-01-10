@@ -18,4 +18,10 @@ export class TestJsonService {
   getPostComents(id: number) {
     return this.http.get<Comment[]>(this.root+'/posts/'+id+'/comments' || this.root+'/comments?postId='+id);
   }
+  getPostsByUserId(userId: number) {
+    return this.http.get<Post[]>(this.root+'/posts?userId='+userId);
+  }
+  postNewPost(post: Post) {
+    return this.http.post(this.root+'/posts', post);
+  }
 }

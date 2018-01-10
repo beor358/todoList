@@ -1,4 +1,12 @@
-<div *ngFor="let post of posts">
-  <p>{{ post.title }}</p>
-  <p>{{ post.body }}</p>
-</div>
+<a mat-fab class="add-task" (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</a>
+<mat-card class="content-box" *ngFor="let post of posts">
+  <mat-card-title>{{ post?.title }}</mat-card-title>
+  <mat-card-subtitle>User ID: {{ post?.userId }}</mat-card-subtitle>
+  <mat-card-content>
+    <div>{{ post?.body | slice:0:100 }}...</div>
+    <button mat-button class="more-btn" color="primary" routerLink="/posts/{{ post.id }}">MORE</button>
+  </mat-card-content>
+</mat-card>
+

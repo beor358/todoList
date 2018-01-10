@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TestJsonService } from '../../services/test-json.service';
+import { Location } from '@angular/common';
 
 import { Post } from '../../classes/post';
 import { Comment } from '../../classes/comment';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class PostComponent implements OnInit {
 
   constructor(
     private httpService: TestJsonService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -46,6 +49,10 @@ export class PostComponent implements OnInit {
       },
       err => { console.log('Error!') }
     )
+  }
+
+  public goBack(): void {
+    this.location.back();
   }
 
 }

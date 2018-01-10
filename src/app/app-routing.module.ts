@@ -7,6 +7,7 @@ import { CreateTaskComponent } from './components/create-task/create-task.compon
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 const routes: Routes = [
   {
@@ -28,11 +29,17 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    component: PostsComponent
+    component: PostsComponent,
   },
   {
     path: 'posts/:id',
-    component: PostComponent
+    component: PostComponent,
+    children: [
+      {
+        path: 'comments',
+        component: CommentsComponent
+      }
+    ]
   }
 ];
 @NgModule({

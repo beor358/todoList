@@ -1,9 +1,14 @@
-<div>
-  <p>{{ post?.title }}</p>
-  <p>{{ post?.body }}</p>
-</div>
-<div *ngFor="let comment of comments">
+<a mat-fab class="add-task" (click)="goBack()">
+  <mat-icon>keyboard_backspace</mat-icon>
+</a>
+
+<mat-card class="content-box">
+  <mat-card-title>{{ post?.title }}</mat-card-title>
+  <mat-card-content>{{ post?.body }}</mat-card-content>
+</mat-card>
+<router-outlet></router-outlet>
+<!-- <div *ngFor="let comment of comments">
   <p>{{ comment?.name }}</p>
   <p>{{ comment?.email }}</p>
   <p>{{ comment?.body }}</p>
-</div>
+</div> -->
