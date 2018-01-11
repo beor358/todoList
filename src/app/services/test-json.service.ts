@@ -10,18 +10,24 @@ export class TestJsonService {
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    return this.http.get<Post[]>(this.root+'/posts');
+    return this.http.get<Post[]>(`${this.root}/posts`);
   }
   getPostById(id: number) {
-    return this.http.get<Post>(this.root+'/posts/'+id);
+    return this.http.get<Post>(`${this.root}/posts/${id}`);
   }
   getPostComents(id: number) {
-    return this.http.get<Comment[]>(this.root+'/posts/'+id+'/comments' || this.root+'/comments?postId='+id);
+    return this.http.get<Comment[]>(`${this.root}/posts/${id}/comments` || `${this.root}/comments?postId=${id}`);
   }
   getPostsByUserId(userId: number) {
-    return this.http.get<Post[]>(this.root+'/posts?userId='+userId);
+    return this.http.get<Post[]>(`${this.root}/posts?userId=${userId}`);
   }
   postNewPost(post: Post) {
-    return this.http.post(this.root+'/posts', post);
+    return this.http.post(`${this.root}/posts`, post);
+  }
+  updatePost(post: Post) {
+    return this.http.put(`${this.root}/posts/${post.id}`, post);
+  }
+  deletePost(postId: number) {
+    return this.http.delete<Post>(`${this.root}/posts/${postId}`);
   }
 }

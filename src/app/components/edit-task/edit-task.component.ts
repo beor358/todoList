@@ -14,7 +14,7 @@ import { Priority } from '../../classes/priority';
 })
 export class EditTaskComponent implements OnInit {
   
-  @Input() task: Task;
+  task: Task;
   public priorityId: number;
 
   PRIORITYS = [

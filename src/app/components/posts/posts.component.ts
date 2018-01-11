@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TestJsonService } from '../../services/test-json.service';
 import { Post } from '../../classes/post';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddPostComponent } from '../add-post/add-post.component';
 import { filter } from 'rxjs/operators';
+import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
   selector: 'app-posts',
@@ -13,12 +14,13 @@ import { filter } from 'rxjs/operators';
 export class PostsComponent implements OnInit {
 
   addPostDialogRef: MatDialogRef<AddPostComponent>;
+  editPostDialogRef: MatDialogRef<EditPostComponent>;
   posts: Post[] = [];
-  //newPost: Post;
-  //done: boolean = false;
+
   constructor(
     private httpService: TestJsonService,
-    public dialog: MatDialog
+    public addDialog: MatDialog,
+    public editDialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -36,35 +38,50 @@ export class PostsComponent implements OnInit {
     )
   }
 
-  openDialog(): void {
-    this.addPostDialogRef = this.dialog.open(AddPostComponent, {
+  openAddPostDialog(): void {
+    this.addPostDialogRef = this.addDialog.open(AddPostComponent, {
       width: '400px',
-      data: {
-        name: 'Hello world!'
-      }
     })
 
     this.addPostDialogRef.afterClosed()
     .pipe(filter(values => values))
     .subscribe(values => {
-      this.httpService.postNewPost(new Post(values))
+      this.httpService.postNewPost(values)
       .subscribe(
-        (data: Post) => { console.log(data) },
+        (data: Post) => { console.log(`Added post id = ${data.id}`) },
         err => { console.log('Error!') }
       );
-      //console.log(values)
     })
   }
-  // openDialog(): void {
-  //   let dialogRef = this.dialog.open(AddPostComponent, {
-  //     width: '400px',
-  //     data: { name: this.name, animal: this.animal }
-  //   });
+  openEditPostDialog(post): void {
+    this.editPostDialogRef = this.editDialog.open(EditPostComponent, {
+      width: '400px',
+      data: {
+        id: post ? post.id : '',
+        title: post ? post.title : '',
+        body: post ? post.body : '',
+        userId: post ? post.userId : ''
+      }
+    })
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     this.animal = result;
-  //   });
-  // }
+    this.editPostDialogRef.afterClosed()
+    .pipe(filter(values => values))
+    .subscribe(values => {
+      this.httpService.updatePost(values)
+      .subscribe(
+        (data: Post) => { console.log(`Post with id: ${data.id} is updated`) },
+        err => { console.log('Error!') }
+      );
+    })
+  }
+
+  deletePost(post: Post) {
+    let id = post.id;
+    this.httpService.deletePost(id)
+    .subscribe(
+      (data: Post) => { console.log(`Deleted post id = ${id}`) },
+      err => { console.log('Error!') }
+    )
+  }
 
 }

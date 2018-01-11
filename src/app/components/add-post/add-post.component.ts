@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Post } from '../../classes/post';
 
@@ -10,7 +10,7 @@ import { Post } from '../../classes/post';
 })
 export class AddPostComponent implements OnInit {
 
-  form: FormGroup;
+  formAdd: FormGroup;
 
   constructor(
     private dialogRef: MatDialogRef<AddPostComponent>,
@@ -18,7 +18,7 @@ export class AddPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = this.builder.group({
+    this.formAdd = this.builder.group({
       title: '',
       body: '',
       userId: ''
@@ -28,8 +28,5 @@ export class AddPostComponent implements OnInit {
   onSubmit(form) {
     this.dialogRef.close(new Post(form.value))
   }
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
 
 }

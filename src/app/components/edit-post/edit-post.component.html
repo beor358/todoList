@@ -1,5 +1,5 @@
-<form [formGroup]="formAdd" (ngSubmit)="onSubmit(formAdd)">
-  <h1 mat-dialog-title>Add post</h1>
+<form [formGroup]="formEdit" (ngSubmit)="onSubmit(formEdit)">
+  <h1 mat-dialog-title>Edit post</h1>
   <mat-dialog-content>
     
     <mat-form-field>
@@ -14,7 +14,7 @@
 
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button type="submit">ADD</button>
+    <button mat-button type="submit">SAVE</button>
     <button mat-button type="button" mat-dialog-close>CANCEL</button>
   </mat-dialog-actions>
 </form>

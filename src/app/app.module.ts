@@ -17,9 +17,9 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatCheckboxModule,
-  MatDialogModule
+  MatCheckboxModule
 } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
@@ -32,6 +32,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     PostsComponent,
     PostComponent,
     CommentsComponent,
-    AddPostComponent
+    AddPostComponent,
+    EditPostComponent
   ],
   imports: [
     NoopAnimationsModule,
@@ -88,6 +90,9 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     TestJsonService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ AddPostComponent ]
+  entryComponents: [ 
+    AddPostComponent,
+    EditPostComponent
+  ]
 })
 export class AppModule { }
