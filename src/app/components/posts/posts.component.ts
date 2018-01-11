@@ -48,7 +48,7 @@ export class PostsComponent implements OnInit {
     .subscribe(values => {
       this.httpService.postNewPost(values)
       .subscribe(
-        (data: Post) => { console.log(`Added post id = ${data.id}`) },
+        (data: Post) => { console.log(`Added post with id: ${data.id}`) },
         err => { console.log('Error!') }
       );
     })
@@ -79,7 +79,7 @@ export class PostsComponent implements OnInit {
     let id = post.id;
     this.httpService.deletePost(id)
     .subscribe(
-      (data: Post) => { console.log(`Deleted post id = ${id}`) },
+      (data: Post) => { console.log(`Deleted post with id: ${id}`) },
       err => { console.log('Error!') }
     )
   }

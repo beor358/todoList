@@ -17,6 +17,8 @@ export class PostComponent implements OnInit {
   id: number;
   post: Post;
   comments: Comment[] = [];
+  edit: boolean = false;
+  title: string;
 
   constructor(
     private httpService: TestJsonService,
@@ -49,6 +51,22 @@ export class PostComponent implements OnInit {
       },
       err => { console.log('Error!') }
     )
+  }
+
+  updatePostField(){
+    this.httpService.updatePostField(this.post.id, this.title)
+    .subscribe(
+      (data: Post) => { console.log(data) },
+      err => { console.log(`Error: ${err}`) }
+    )
+    this.edit = false;
+  }
+
+  openEditField() {
+    this.edit = true;
+  }
+  closeEditField() {
+    this.edit = false;
   }
 
   public goBack(): void {

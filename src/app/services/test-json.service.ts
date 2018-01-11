@@ -27,6 +27,12 @@ export class TestJsonService {
   updatePost(post: Post) {
     return this.http.put(`${this.root}/posts/${post.id}`, post);
   }
+  updatePostField(postId: number, title: string) {
+    let body = {
+      'title': title
+    }
+    return this.http.patch(`${this.root}/posts/${postId}`, body)
+  }
   deletePost(postId: number) {
     return this.http.delete<Post>(`${this.root}/posts/${postId}`);
   }
