@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { TodoService } from '../../services/todo.service';
-import { Location } from '@angular/common';
 import { errorMessages } from '../../errors';
 
 @Component({
@@ -11,7 +11,7 @@ import { errorMessages } from '../../errors';
 })
 export class CreateTaskComponent implements OnInit {
 
-  form: FormGroup;
+  formCreate: FormGroup;
   errors = errorMessages;
   PRIORITYS = [
     'High',
@@ -20,39 +20,21 @@ export class CreateTaskComponent implements OnInit {
   ];
   constructor(
     private todoService: TodoService,
-    private location: Location
+    private dialogRef: MatDialogRef<CreateTaskComponent>,
+    private builder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.createForm();
+    this.formCreate = this.builder.group({
+      name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
+      startDate: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(128)]],
+      finishDate: ['', Validators.required],
+      description: ['', Validators.required],
+      priorityId: ['', Validators.required]
+    })
   }
 
-  private createForm(): void {
-    this.form = new FormGroup({
-      name: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(32)
-      ]),
-      description: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(128)
-      ]),
-      startDate: new FormControl(new Date(), Validators.required),
-      finishDate: new FormControl(new Date(), Validators.required),
-      priority: new FormControl(null, Validators.required),
-    });
-  }
-
-  public addTask(): void {
-    let priority = this.form.value.priority;
-    delete this.form.value.priority;
-  	this.todoService.addTask(this.form.value, priority);
-    this.form.reset();
-  }
-
-  public goBack(): void {
-    this.location.back();
+  onSubmit(form) {
+    this.dialogRef.close(form.value);
   }
 }

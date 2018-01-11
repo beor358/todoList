@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { TodoService } from '../../services/todo.service';
 import { Task } from '../../classes/task';
@@ -14,8 +13,7 @@ import { Priority } from '../../classes/priority';
 })
 export class EditTaskComponent implements OnInit {
   
-  task: Task;
-  public priorityId: number;
+  formEdit: FormGroup;
 
   PRIORITYS = [
     'High',
@@ -24,30 +22,24 @@ export class EditTaskComponent implements OnInit {
   ];
   constructor(
   	private todoService: TodoService,
-  	private route: ActivatedRoute,
-    private location: Location
+    private dialogRef: MatDialogRef<EditTaskComponent>,
+    private builder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) private data
   ) { }
 
   ngOnInit(): void {
-  	this.getTask();
+    this.formEdit = this.builder.group({
+      name: this.data.name,
+      startDate: this.data.startDate,
+      finishDate: this.data.finishDate,
+      description: this.data.description,
+      priorityId: this.data.priority.id
+    })
   }
   
-  public deleteTask() {
-  	this.todoService.deleteTaskById(this.task.id);
+  onSubmit(form) {
+    this.dialogRef.close(new Task(this.data.id, form.value, form.value.priorityId));
   }
 
-  public updateTask(): void {
-    this.task.priority = new Priority(this.task.priority.id);
-  	this.todoService.updateTaskById(this.task.id, this.task);
-  }
-
-  public getTask(): void {
-  	const id = +this.route.snapshot.paramMap.get('id');
-  	this.task = this.todoService.getTaskById(id);
-  }
-
-  public goBack(): void {
-    this.location.back();
-  }
 
 }

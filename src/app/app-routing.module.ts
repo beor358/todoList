@@ -12,21 +12,21 @@ import { CommentsComponent } from './components/comments/comments.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'todolist',
+    redirectTo: 'todos',
     pathMatch: 'full'
   },
   {
-    path: 'todolist',
+    path: 'todos',
     component: TodoListComponent
   },
-  {
-  	path: 'newtask',
-  	component: CreateTaskComponent
-  },
-  {
-  	path: 'task/:id',
-  	component: EditTaskComponent
-  },
+  // {
+  // 	path: 'newtask',
+  // 	component: CreateTaskComponent
+  // },
+  // {
+  // 	path: 'task/:id',
+  // 	component: EditTaskComponent
+  // },
   {
     path: 'posts',
     component: PostsComponent,

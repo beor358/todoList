@@ -1,48 +1,40 @@
-<a mat-fab class="add-task" (click)="goBack()">
-  <mat-icon>keyboard_backspace</mat-icon>
-</a>
-
-<mat-card class="content-box">
-<mat-card-title>Edit task</mat-card-title>
-<div class="task-info">
-  <p><span>Ttle: </span>{{ task.name }}</p>
-  <p><span>Description: </span>{{ task.description }}</p>
-  <p><span>Start date: </span>{{ task.startDate | date:"yyyy-MM-dd" }}</p>
-  <p><span>Finish date: </span>{{ task.finishDate | date:"yyyy-MM-dd" }}</p>
-  <p><span>Priority: </span>{{ task.priority.name }}</p>
-</div>
-
-<div *ngIf="task">
+<form [formGroup]="formEdit" (ngSubmit)="onSubmit(formEdit)">
+  <h1 mat-dialog-title>Edit task</h1>
+  <mat-dialog-content>
 
     <mat-form-field>
-      <input matInput [(ngModel)]="task.name" placeholder="Title" required>
+      <input matInput formControlName="name" placeholder="Title" required>
     </mat-form-field>
 
     <mat-form-field>
-      <textarea matInput [(ngModel)]="task.description" placeholder="Description"></textarea>
+      <textarea matInput formControlName="description" placeholder="Description"></textarea>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="startPicker" [(ngModel)]="task.startDate" placeholder="Start date" required>
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="Start date" required>
       <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
       <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="task.finishDate" placeholder="Finish date" required>
+      <input matInput [matDatepicker]="picker" formControlName="finishDate" placeholder="Finish date" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-        <mat-select placeholder="id" [(ngModel)]="task.priority.id" required>
+        <mat-select placeholder="Priority" formControlName="priorityId" required>
         <mat-option></mat-option>
         <mat-option *ngFor="let priorityName of PRIORITYS; let i = index" [value]="i+1">
           {{priorityName}}
         </mat-option>
 			</mat-select>
     </mat-form-field>
-    
-  <button color="primary" mat-button (click)="updateTask()">SAVE</button>
-  </div>
-</mat-card>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit" color="primary">SAVE</button>
+    <button mat-button type="button" color="primary" mat-dialog-close>CANCEL</button>
+  </mat-dialog-actions>
+
+</form>

@@ -1,4 +1,4 @@
-<a mat-fab class="add-task" routerLink="/newtask">
+<a mat-fab class="add-task" (click)="openCreateTaskDialog()">
   <mat-icon>add</mat-icon>
 </a>
 <mat-card class="content-box">
@@ -70,11 +70,11 @@
     </div>
     <div class="flex-col">
       <mat-checkbox (click)="completeTask(task)" [checked]="task.completed"></mat-checkbox>
-      <a mat-icon-button routerLink="/task/{{ task.id }}">
+      <button mat-icon-button (click)="openEditTaskDialog(task)">
         <mat-icon aria-label="Edit task">
           mode_edit
         </mat-icon>
-      </a>
+      </button>
       <a mat-icon-button>
         <mat-icon aria-label="Delete task" (click)="deleteTask(task)">
           delete
