@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,9 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatListModule,
+  MatMenuModule
 } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -33,7 +36,7 @@ import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
-
+import { AnimateImagesComponent } from './components/animate-images/animate-images.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     PostComponent,
     CommentsComponent,
     AddPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    AnimateImagesComponent,
   ],
   imports: [
     NoopAnimationsModule,
@@ -68,7 +72,10 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     MatSelectModule,
     MatSlideToggleModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatListModule,
+    MatMenuModule
   ],
   exports: [
     MatCardModule,

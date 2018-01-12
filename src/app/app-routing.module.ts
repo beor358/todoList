@@ -8,6 +8,7 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { AnimateImagesComponent } from './components/animate-images/animate-images.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
         component: CommentsComponent
       }
     ]
+  },
+  {
+    path: 'img',
+    component: AnimateImagesComponent
   }
 ];
 @NgModule({

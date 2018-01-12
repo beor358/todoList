@@ -51,7 +51,7 @@ export class TodoListComponent implements OnInit {
     this.todoService.completeTaskById(task.id);
   }
 
-  public sortTasksByName(ts: Array<Task>): void {
+  public sortTasksByName(): void {
     this.todoService.sortTasksByName();
   }
 
