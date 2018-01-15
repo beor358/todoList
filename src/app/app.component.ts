@@ -9,19 +9,5 @@ import { TodoService } from './services/todo.service';
 })
 export class AppComponent {
   
-  navs = [
-    {
-      link: '/todos',
-      title: 'Todos'
-    },
-    {
-      link: '/posts',
-      title: 'Posts'
-    },
-    {
-      link: '/img',
-      title: 'Images'
-    }
-  ]
   constructor(private todoService: TodoService) { }
 }

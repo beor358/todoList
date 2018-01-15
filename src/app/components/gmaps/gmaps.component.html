@@ -1,0 +1,40 @@
+<mat-card class="gmap-wrapper">
+  <mat-card-title>Bermuda Triangle Map</mat-card-title>
+  <agm-map 
+  [latitude]="center.lat" 
+  [longitude]="center.lng"
+  [zoom]="zoom">
+    <agm-marker 
+    *ngFor="let coord of triangleCoords"
+    [latitude]="coord.lat" 
+    [longitude]="coord.lng"
+    [iconUrl]="markerUrl"
+    
+    [draggable]="coord.draggable">
+
+    <agm-info-window>
+        <strong>{{ coord.label }}</strong>, 
+        <strong>lat:</strong> {{ coord.lat }}, 
+        <strong>lng:</strong> {{ coord.lng }}
+      </agm-info-window>
+
+  </agm-marker>
+
+  <agm-polyline
+  [strokeWeight]="1">
+
+    <agm-polyline-point
+      *ngFor="let coord of triangleCoords"
+      [latitude]="coord.lat" 
+      [longitude]="coord.lng">
+    </agm-polyline-point>
+
+    <agm-polyline-point
+      [latitude]="triangleCoords[0].lat" 
+      [longitude]="triangleCoords[0].lng">
+    </agm-polyline-point>
+
+  </agm-polyline>
+
+  </agm-map>
+</mat-card>

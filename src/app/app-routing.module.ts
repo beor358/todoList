@@ -9,6 +9,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { AnimateImagesComponent } from './components/animate-images/animate-images.component';
+import { GmapsComponent } from './components/gmaps/gmaps.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'img',
     component: AnimateImagesComponent
+  },
+  {
+    path: 'gmap',
+    component: GmapsComponent
   }
 ];
 @NgModule({

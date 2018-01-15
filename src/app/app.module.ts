@@ -37,6 +37,8 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { AnimateImagesComponent } from './components/animate-images/animate-images.component';
+import { GmapsComponent } from './components/gmaps/gmaps.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { AnimateImagesComponent } from './components/animate-images/animate-imag
     AddPostComponent,
     EditPostComponent,
     AnimateImagesComponent,
+    GmapsComponent,
   ],
   imports: [
     NoopAnimationsModule,
@@ -75,7 +78,10 @@ import { AnimateImagesComponent } from './components/animate-images/animate-imag
     MatDialogModule,
     BrowserAnimationsModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyARQrBSaI0pAjqKxOB0s1OT7Y6klrQMywE'
+    })
   ],
   exports: [
     MatCardModule,
@@ -99,7 +105,9 @@ import { AnimateImagesComponent } from './components/animate-images/animate-imag
   bootstrap: [AppComponent],
   entryComponents: [ 
     AddPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    CreateTaskComponent,
+    EditTaskComponent
   ]
 })
 export class AppModule { }
