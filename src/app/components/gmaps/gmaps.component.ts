@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-gmaps',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gmaps.component.scss']
 })
 export class GmapsComponent implements OnInit {
-  zoom: number = 5
-  markerUrl = 'assets/map-marker.png'
+  selectPoint: Marker;
+  zoom: number = 5;
+  markerUrl = 'assets/map-marker.png';
   triangleCoords: Marker[] = [
     {
       lat: 25.774,
@@ -28,10 +30,28 @@ export class GmapsComponent implements OnInit {
       draggable: false
     }
   ];
-  center = {lat: 25.886, lng: -70.268}
+  center = {
+    lat: 25.886, 
+    lng: -70.268
+  }
+
+  infoOptions = {
+    border: false,
+    borderRadius: '10px',
+    closeOnMapClick: true,
+    closeWhenOthersOpen: true,
+    fontColor: '#0091EA',
+    maxWidth: '50',
+    padding: '10px 30px'
+
+  }
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectOnChange() {
+    console.log(this.selectPoint);
   }
 
 }

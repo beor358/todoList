@@ -1,26 +1,43 @@
 <mat-card class="gmap-wrapper">
   <mat-card-title>Bermuda Triangle Map</mat-card-title>
+
+  <mat-form-field>
+    <mat-select [(value)]="selectPoint" (selectionChange)="selectOnChange($event)">
+      <mat-option *ngFor="let coord of triangleCoords" [value]="coord">
+        {{ coord.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <agm-map 
   [latitude]="center.lat" 
   [longitude]="center.lng"
-  [zoom]="zoom">
+  [zoom]="zoom"> <!-- *ngFor="let coord of triangleCoords" -->
     <agm-marker 
-    *ngFor="let coord of triangleCoords"
-    [latitude]="coord.lat" 
-    [longitude]="coord.lng"
+    *ngIf="selectPoint"
+    [latitude]="selectPoint.lat" 
+    [longitude]="selectPoint.lng"
     [iconUrl]="markerUrl"
-    
-    [draggable]="coord.draggable">
+    [draggable]="selectPoint.draggable">
 
-    <agm-info-window>
-        <strong>{{ coord.label }}</strong>, 
-        <strong>lat:</strong> {{ coord.lat }}, 
-        <strong>lng:</strong> {{ coord.lng }}
-      </agm-info-window>
+    <agm-snazzy-info-window 
+    [maxWidth]="infoOptions.maxWidth" 
+    [border]="infoOptions.border"
+    [borderRadius]="infoOptions.borderRadius"
+    [closeOnMapClick]="infoOptions.closeOnMapClick"
+    [closeWhenOthersOpen]="infoOptions.closeWhenOthersOpen"
+    [padding]="infoOptions.padding"
+    >
+      <ng-template>
+        <strong>{{ selectPoint.label }}</strong>,<br>
+        <strong>lat:</strong> {{ selectPoint.lat }},<br>
+        <strong>lng:</strong> {{ selectPoint.lng }}
+      </ng-template>
+    </agm-snazzy-info-window>
 
   </agm-marker>
 
-  <agm-polyline
+  <!-- <agm-polyline
   [strokeWeight]="1">
 
     <agm-polyline-point
@@ -34,7 +51,10 @@
       [longitude]="triangleCoords[0].lng">
     </agm-polyline-point>
 
-  </agm-polyline>
+  </agm-polyline> -->
+
+  <agm-polygon
+  [paths]="triangleCoords"></agm-polygon>
 
   </agm-map>
 </mat-card>

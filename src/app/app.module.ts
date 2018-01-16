@@ -39,6 +39,7 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { AnimateImagesComponent } from './components/animate-images/animate-images.component';
 import { GmapsComponent } from './components/gmaps/gmaps.component';
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { AgmCoreModule } from '@agm/core';
     MatMenuModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARQrBSaI0pAjqKxOB0s1OT7Y6klrQMywE'
-    })
+    }),
+    AgmSnazzyInfoWindowModule
   ],
   exports: [
     MatCardModule,
