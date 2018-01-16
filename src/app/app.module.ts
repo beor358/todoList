@@ -40,6 +40,7 @@ import { AnimateImagesComponent } from './components/animate-images/animate-imag
 import { GmapsComponent } from './components/gmaps/gmaps.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARQrBSaI0pAjqKxOB0s1OT7Y6klrQMywE'
     }),
-    AgmSnazzyInfoWindowModule
+    AgmSnazzyInfoWindowModule,
+    AgmJsMarkerClustererModule
   ],
   exports: [
     MatCardModule,

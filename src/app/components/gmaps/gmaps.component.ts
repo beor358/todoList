@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms/src/model';
   styleUrls: ['./gmaps.component.scss']
 })
 export class GmapsComponent implements OnInit {
+  showMap: boolean = false;
   selectPoint: Marker;
   zoom: number = 5;
   markerUrl = 'assets/map-marker.png';
@@ -52,6 +53,10 @@ export class GmapsComponent implements OnInit {
 
   selectOnChange() {
     console.log(this.selectPoint);
+  }
+  toggleMap() {
+    this.showMap = !this.showMap;
+    // console
   }
 
 }

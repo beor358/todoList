@@ -3,16 +3,32 @@
 
   <mat-form-field>
     <mat-select [(value)]="selectPoint" (selectionChange)="selectOnChange($event)">
+      <mat-option>--</mat-option>
       <mat-option *ngFor="let coord of triangleCoords" [value]="coord">
         {{ coord.label }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <agm-map 
+  <mat-slide-toggle
+  [checked]="showMap"
+  (change)="toggleMap($event)">
+  </mat-slide-toggle>
+
+  <agm-map *ngIf="showMap"
   [latitude]="center.lat" 
   [longitude]="center.lng"
   [zoom]="zoom"> <!-- *ngFor="let coord of triangleCoords" -->
+
+    <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+      <agm-marker 
+      *ngFor="let coord of triangleCoords" 
+      [latitude]="coord.lat" 
+      [longitude]="coord.lng"
+      [visible]="false">
+      </agm-marker><!-- multiple markers -->
+    </agm-marker-cluster>
+
     <agm-marker 
     *ngIf="selectPoint"
     [latitude]="selectPoint.lat" 
