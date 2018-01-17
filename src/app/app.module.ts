@@ -82,7 +82,8 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
     MatListModule,
     MatMenuModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyARQrBSaI0pAjqKxOB0s1OT7Y6klrQMywE'
+      apiKey: 'AIzaSyARQrBSaI0pAjqKxOB0s1OT7Y6klrQMywE',
+      libraries: ["places"]
     }),
     AgmSnazzyInfoWindowModule,
     AgmJsMarkerClustererModule

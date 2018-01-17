@@ -1,14 +1,18 @@
 <mat-card class="gmap-wrapper">
   <mat-card-title>Bermuda Triangle Map</mat-card-title>
 
-  <mat-form-field>
-    <mat-select [(value)]="selectPoint" (selectionChange)="selectOnChange($event)">
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let coord of triangleCoords" [value]="coord">
-        {{ coord.label }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-input-container>
+      <input matInput
+      placeholder="Search for location" 
+      type="text" #search class="form-control"
+      [formControl]="searchControl">
+      <button 
+      mat-icon-button 
+      matSuffix
+      (click)="searchControl.reset()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-input-container>
 
   <mat-slide-toggle
   [checked]="showMap"
@@ -16,61 +20,58 @@
   </mat-slide-toggle>
 
   <agm-map *ngIf="showMap"
-  [latitude]="center.lat" 
-  [longitude]="center.lng"
-  [zoom]="zoom"> <!-- *ngFor="let coord of triangleCoords" -->
+  [latitude]="latitude" 
+  [longitude]="longitude"
+  [zoom]="zoom">
 
     <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
       <agm-marker 
-      *ngFor="let coord of triangleCoords" 
-      [latitude]="coord.lat" 
-      [longitude]="coord.lng"
-      [visible]="false">
-      </agm-marker><!-- multiple markers -->
-    </agm-marker-cluster>
-
-    <agm-marker 
-    *ngIf="selectPoint"
-    [latitude]="selectPoint.lat" 
-    [longitude]="selectPoint.lng"
-    [iconUrl]="markerUrl"
-    [draggable]="selectPoint.draggable">
-
-    <agm-snazzy-info-window 
-    [maxWidth]="infoOptions.maxWidth" 
-    [border]="infoOptions.border"
-    [borderRadius]="infoOptions.borderRadius"
-    [closeOnMapClick]="infoOptions.closeOnMapClick"
-    [closeWhenOthersOpen]="infoOptions.closeWhenOthersOpen"
-    [padding]="infoOptions.padding"
-    >
-      <ng-template>
-        <strong>{{ selectPoint.label }}</strong>,<br>
-        <strong>lat:</strong> {{ selectPoint.lat }},<br>
-        <strong>lng:</strong> {{ selectPoint.lng }}
-      </ng-template>
-    </agm-snazzy-info-window>
-
-  </agm-marker>
-
-  <!-- <agm-polyline
-  [strokeWeight]="1">
-
-    <agm-polyline-point
       *ngFor="let coord of triangleCoords"
       [latitude]="coord.lat" 
-      [longitude]="coord.lng">
-    </agm-polyline-point>
+      [longitude]="coord.lng"
+      [iconUrl]="'assets/map-marker.png'"
+      [draggable]="coord.draggable">
 
-    <agm-polyline-point
-      [latitude]="triangleCoords[0].lat" 
-      [longitude]="triangleCoords[0].lng">
-    </agm-polyline-point>
+      <agm-snazzy-info-window 
+      [maxWidth]="infoOptions.maxWidth" 
+      [border]="infoOptions.border"
+      [borderRadius]="infoOptions.borderRadius"
+      [closeOnMapClick]="infoOptions.closeOnMapClick"
+      [closeWhenOthersOpen]="infoOptions.closeWhenOthersOpen"
+      [padding]="infoOptions.padding"
+      [maxHeight]="infoOptions.maxHeight"
+      >
+        <ng-template>
+          <strong>
+            <a href="http://www.google.com/search?q={{ coord.label }}">
+              {{ coord.label }}
+            </a>
+          </strong>
+          <a mat-icon-button color="primary"
+          (click)="toFavorite(coord)"
+          *ngIf="coord.isFavorite; else not">
+            <mat-icon>favorite</mat-icon>
+          </a>
+          <ng-template #not>
+            <a mat-icon-button color="primary" (click)="toFavorite(coord)">
+              <mat-icon>favorite_border</mat-icon>
+            </a>
+          </ng-template>
+          <div class="description">
+            <p>{{ coord.descr }}</p>
+            <img src="{{ coord.imgUrl }}">
+          </div>
+        </ng-template>
+      </agm-snazzy-info-window>
+    </agm-marker>
 
-  </agm-polyline> -->
+  </agm-marker-cluster>
+
+  
 
   <agm-polygon
-  [paths]="triangleCoords"></agm-polygon>
+  [paths]="triangleCoords"
+  [strokeWeight]="0"></agm-polygon>
 
   </agm-map>
 </mat-card>
