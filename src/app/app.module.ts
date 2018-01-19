@@ -38,7 +38,7 @@ import { AddPostComponent } from './components/add-post/add-post.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { AnimateImagesComponent } from './components/animate-images/animate-images.component';
 import { GmapsComponent } from './components/gmaps/gmaps.component';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, PolygonManager } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
@@ -105,7 +105,9 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
   ],
   providers: [
     TodoService,
-    TestJsonService
+    TestJsonService,
+    PolygonManager,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent],
   entryComponents: [ 

@@ -73,7 +73,9 @@ export class GmapsComponent implements OnInit {
     this.showMap = !this.showMap;
   }
   toFavorite(coord: Marker) {
-    coord.isFavorite = !coord.isFavorite;
+    this.ngZone.run(() => {
+      coord.isFavorite = !coord.isFavorite;
+    })
     console.log(`${coord.label}: ${coord.isFavorite}`);
   }
 

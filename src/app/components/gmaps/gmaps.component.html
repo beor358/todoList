@@ -49,14 +49,10 @@
           </strong>
           <a mat-icon-button color="primary"
           (click)="toFavorite(coord)"
-          *ngIf="coord.isFavorite; else not">
-            <mat-icon>favorite</mat-icon>
+          >
+            <mat-icon *ngIf="coord.isFavorite; else not">favorite</mat-icon>
+            <ng-template #not><mat-icon>favorite_border</mat-icon></ng-template>
           </a>
-          <ng-template #not>
-            <a mat-icon-button color="primary" (click)="toFavorite(coord)">
-              <mat-icon>favorite_border</mat-icon>
-            </a>
-          </ng-template>
           <div class="description">
             <p>{{ coord.descr }}</p>
             <img src="{{ coord.imgUrl }}">
