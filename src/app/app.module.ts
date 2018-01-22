@@ -41,6 +41,7 @@ import { GmapsComponent } from './components/gmaps/gmaps.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper, PolygonManager } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { AppLoginComponent } from './components/app-login/app-login.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
     EditPostComponent,
     AnimateImagesComponent,
     GmapsComponent,
+    AppLoginComponent,
   ],
   imports: [
     NoopAnimationsModule,
